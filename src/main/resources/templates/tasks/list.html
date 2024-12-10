@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko"
+  layout:decorate="~{layouts/common_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>TM :: Check all of your perfect goals</title>
+</head>
+<body>
+  <div layout:fragment="contents" class="w-full">
+
+    <div class="mb-6">
+      <h1 class="text-3xl font-bold"> Tasks </h1>
+    </div>
+
+    <div id="search-con" class="hidden">
+      <form action="" method="GET" class="flex">
+        <label class="input input-sm input-bordered flex items-center gap-2 w-1/2">
+          <input type="text" class="grow" placeholder="Search" />
+          <button>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70">
+              <path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </label>
+      </form>
+    </div>
+
+    <div class="divider my-2"></div>
+
+    <div id="task-list-con">
+      <div class="flex items-center gap-3 my-4" th:each="task : ${tasks.data}">
+        <div class="flex flex-col">
+          <div class="font-bold mb-2">
+            <a th:href="@{~/tasks/{code}(code=${task.code})}">
+              [[ ${task.title} ]]
+            </a>
+            <div class="badge font-bold" th:classappend="${task.getPriorityLevel()}">
+              [[ ${task.priority} ]]
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <span class="text-sm opacity-50">START DATE : [[ ${task.startTime} ]]</span>
+            <span class="text-sm opacity-50">DUE DATE : [[ ${task.endTime} ]]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-4">
+      <button
+            id="list-loading-btn"
+            class="btn btn-xs"
+            data-page="1"
+            onclick="loadMoreTask()"
+      >
+        more ...
+      </button>
+    </div>
+
+  </div>
+</body>
+</html>

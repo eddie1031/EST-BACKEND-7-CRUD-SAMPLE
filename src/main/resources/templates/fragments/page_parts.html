@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div th:fragment="taskPagePart">
+      <div id="loaded">
+          <div class="flex items-center gap-3 my-4" th:each="task : ${tasks.data}">
+              <div class="flex flex-col">
+                  <div class="font-bold mb-2">
+                      <a th:href="@{~/tasks/{code}(code=${task.code})}">
+                          [[ ${task.title} ]]
+                      </a>
+                      <div class="badge font-bold" th:classappend="${task.getPriorityLevel()}">
+                          [[ ${task.priority} ]]
+                      </div>
+                  </div>
+                  <div class="flex gap-4">
+                      <span class="text-sm opacity-50">START DATE : [[ ${task.startTime} ]]</span>
+                      <span class="text-sm opacity-50">DUE DATE : [[ ${task.endTime} ]]</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div id="next-page" type="hidden" th:if="${tasks.hasNext}" th:value="${page}"></div>
+  </div>
+
+</body>
+</html>

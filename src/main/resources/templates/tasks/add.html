@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en"
+  layout:decorate="~{layouts/common_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>TM :: Task Manager, Append your perfect task</title>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+  <style>
+  </style>
+</head>
+<body>
+  <div layout:fragment="contents" class="w-full">
+
+    <div class="text-3xl font-bold">
+      Append a new task
+    </div>
+
+    <form action="/tasks/append" method="POST" th:object="${taskDto}" class="w-full mt-5">
+      <div class="w-full my-4 flex gap-4 items-center">
+        <div>
+          <div class="relative max-w-sm">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+              </svg>
+            </div>
+            <input id="start-date-picker" datepicker datepicker-buttons datepicker-autoselect-today
+                   type="text"
+                   class="text-gray-900 text-sm rounded-lg focus:border-gray-500 focus:border-gray-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-gray-500 dark:focus:border-gray-500"
+                   placeholder="Start date"
+                   name="startTime"
+                   required
+                   th:errorclass="error-msg"
+                   th:field="*{startTime}"
+            >
+          </div>
+          <div class="error-msg text-sm text-red-500" th:errors="*{startTime}"></div>
+        </div>
+        <div>
+          <div class="relative max-w-sm">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+              </svg>
+            </div>
+            <input id="due-date-picker"
+                   datepicker
+                   datepicker-buttons
+                   datepicker-autoselect-today
+                   type="text"
+                   class="text-gray-900 text-sm rounded-lg focus:border-gray-500 focus:border-gray-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-gray-500 dark:focus:border-gray-500"
+                   placeholder="Due date"
+                   name="endTime"
+                   required
+                   th:errorclass="error-msg"
+                   th:field="*{endTime}"
+            >
+          </div>
+          <div class="error-msg text-sm text-red-500" th:errors="*{endTime}"></div>
+        </div>
+
+
+        <div class="flex-grow"></div>
+
+        <div class="flex items-center gap-4">
+          <span class="opacity-50">Priority</span>
+          <select class="select select-xs max-w-xs" name="priority">
+            <option selected value="0">
+              0
+            </option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+
+        <div class="mx-6">
+          <div class="form-control">
+            <label class="label cursor-pointer">
+              <span class="label-text opacity-50 mr-4 text-base">Complete</span>
+              <input type="checkbox" th:value="true" class="checkbox checkbox-sm" name="completeStatus"/>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-2xl font-bold w-full">
+        <input
+          type="text"
+          placeholder="Task name"
+          class="input input-bordered input-sm w-full font-normal"
+          name="title"
+          id="title"
+          required
+          th:errorclass="error-msg"
+          th:field="*{title}"
+        />
+        <div class="error-msg font-normal text-sm text-red-500" th:errors="*{title}"></div>
+      </div>
+
+      <div class="w-full my-4">
+        <textarea class="textarea textarea-bordered resize-none w-full h-40"
+                  placeholder="Description of task"
+                  name="description"></textarea>
+      </div>
+
+
+      <div class="flex gap-4 justify-end">
+        <button class="btn btn-ghost btn-sm">
+          Add
+        </button>
+        <button class="btn btn-ghost btn-sm" type="button" onclick="history.back();">
+          Cancel
+        </button>
+      </div>
+
+
+    </form>
+  </div>
+</body>
+</html>

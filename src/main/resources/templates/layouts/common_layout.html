@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="lofi">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <th:block th:insert="~{fragments/common_headers::commonHeader}"></th:block>
+    <th:block th:insert="~{fragments/api_headers::taskApiHeader}"></th:block>
+</head>
+<body>
+    <div id="root" class="flex">
+        <div th:replace="~{fragments/menu::side-menu}"></div>
+        <div class="container mx-auto p-10 w-full">
+            <div class="container mx-auto mt-4 flex-grow" layout:fragment="contents"></div>
+        </div>
+    </div>
+</body>
+</html>
